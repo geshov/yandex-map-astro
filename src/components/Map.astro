@@ -1,8 +1,14 @@
 ---
-const { lon, lat, marker } = Astro.props;
+const { lon, lat, zoom, marker } = Astro.props;
 ---
 
-<div id="map" data-lon={lon} data-lat={lat} class="w-full h-112"></div>
+<div
+  id="map"
+  data-lon={lon}
+  data-lat={lat}
+  data-zoom={zoom}
+  class="w-full h-112">
+</div>
 
 <div id="marker" class="hidden chat chat-start">
   <div class="chat-bubble bg-base-300 w-40 -translate-y-10">
@@ -29,7 +35,7 @@ const { lon, lat, marker } = Astro.props;
     theme: "dark",
     location: {
       center: coordinates,
-      zoom: 16,
+      zoom: mapEl.dataset.zoom,
     },
     behaviors: ["drag"],
   });
