@@ -1,0 +1,43 @@
+---
+const { lon, lat, marker } = Astro.props;
+---
+
+<div id="map" data-lon={lon} data-lat={lat} class="w-full h-112"></div>
+
+<div id="marker" class="hidden chat chat-start">
+  <div class="chat-bubble bg-base-300 w-40 -translate-y-10">
+    <div class="font-semibold">{marker}</div>
+  </div>
+</div>
+
+<script
+  is:inline
+  src="https://api-maps.yandex.ru/v3/?apikey=YANDEX-MAP-APY-KEY&lang=ru_RU"
+></script>
+
+<script>
+  // @ts-nocheck
+  await ymaps3.ready;
+
+  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } =
+    ymaps3;
+
+  const mapEl = document.querySelector("#map");
+  const coordinates = [mapEl.dataset.lon, mapEl.dataset.lat];
+
+  const map = new YMap(mapEl, {
+    theme: "dark",
+    location: {
+      center: coordinates,
+      zoom: 16,
+    },
+    behaviors: ["drag"],
+  });
+
+  map.addChild(new YMapDefaultSchemeLayer());
+  map.addChild(new YMapDefaultFeaturesLayer());
+
+  const markerEl = document.querySelector("#marker");
+  map.addChild(new YMapMarker({ coordinates: coordinates }, markerEl));
+  markerEl.classList.remove("hidden");
+</script>
