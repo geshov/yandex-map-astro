@@ -1,5 +1,5 @@
 ---
-const { lon, lat, zoom, marker } = Astro.props;
+const { lon, lat, zoom = 16, theme = "light", marker = "Маркер" } = Astro.props;
 ---
 
 <div
@@ -7,6 +7,7 @@ const { lon, lat, zoom, marker } = Astro.props;
   data-lon={lon}
   data-lat={lat}
   data-zoom={zoom}
+  data-theme={theme}
   class="w-full h-112">
 </div>
 
@@ -32,7 +33,7 @@ const { lon, lat, zoom, marker } = Astro.props;
   const coordinates = [mapEl.dataset.lon, mapEl.dataset.lat];
 
   const map = new YMap(mapEl, {
-    theme: "dark",
+    theme: mapEl.dataset.theme,
     location: {
       center: coordinates,
       zoom: mapEl.dataset.zoom,
