@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Map from "../components/Map.astro";
+import Marker from "../components/Marker.astro";
 ---
 
 <html lang="ru">
@@ -14,12 +15,8 @@ import Map from "../components/Map.astro";
   </head>
 
   <body>
-    <Map
-      lat={55.665047}
-      lon={37.479585}
-      zoom={16}
-      theme="dark"
-      marker="Наименование"
-    />
+    <Map lat={55.665047} lon={37.479585} zoom={16} theme="dark">
+      <Marker />
+    </Map>
   </body>
 </html>

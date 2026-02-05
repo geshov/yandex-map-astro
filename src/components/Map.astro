@@ -1,5 +1,5 @@
 ---
-const { lat, lon, zoom = 16, theme = "light", marker = "Маркер" } = Astro.props;
+const { lat, lon, zoom = 16, theme = "light" } = Astro.props;
 ---
 
 <div
@@ -11,10 +11,8 @@ const { lat, lon, zoom = 16, theme = "light", marker = "Маркер" } = Astro.
   class="w-full h-112">
 </div>
 
-<div id="marker" class="hidden chat chat-start">
-  <div class="chat-bubble bg-base-300 w-40 -translate-y-10">
-    <div class="font-semibold">{marker}</div>
-  </div>
+<div id="marker" class="hidden">
+  <slot />
 </div>
 
 <script
