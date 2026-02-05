@@ -1,11 +1,11 @@
 ---
-const { lon, lat, zoom = 16, theme = "light", marker = "Маркер" } = Astro.props;
+const { lat, lon, zoom = 16, theme = "light", marker = "Маркер" } = Astro.props;
 ---
 
 <div
   id="map"
-  data-lon={lon}
   data-lat={lat}
+  data-lon={lon}
   data-zoom={zoom}
   data-theme={theme}
   class="w-full h-112">
