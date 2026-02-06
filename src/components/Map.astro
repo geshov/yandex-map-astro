@@ -36,7 +36,7 @@ const { lat, lon, zoom = 16, theme = "light" } = Astro.props;
       center: coordinates,
       zoom: mapEl.dataset.zoom,
     },
-    behaviors: ["drag"],
+    behaviors: ["drag", "pinchZoom"],
   });
 
   map.addChild(new YMapDefaultSchemeLayer());
