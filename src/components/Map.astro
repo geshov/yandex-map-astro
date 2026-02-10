@@ -24,8 +24,17 @@ const { lat, lon, zoom = 16, theme = "light" } = Astro.props;
   // @ts-nocheck
   await ymaps3.ready;
 
-  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } =
-    ymaps3;
+  const {
+    YMap,
+    YMapDefaultSchemeLayer,
+    YMapDefaultFeaturesLayer,
+    YMapControls,
+    YMapMarker,
+  } = ymaps3;
+
+  const { YMapZoomControl } = await ymaps3.import(
+    "@yandex/ymaps3-controls@0.0.1",
+  );
 
   const mapEl = document.querySelector("#map");
   const coordinates = [mapEl.dataset.lon, mapEl.dataset.lat];
@@ -41,6 +50,12 @@ const { lat, lon, zoom = 16, theme = "light" } = Astro.props;
 
   map.addChild(new YMapDefaultSchemeLayer());
   map.addChild(new YMapDefaultFeaturesLayer());
+
+  map.addChild(
+    new YMapControls({
+      position: "right",
+    }).addChild(new YMapZoomControl()),
+  );
 
   const markerEl = document.querySelector("#marker");
   map.addChild(new YMapMarker({ coordinates: coordinates }, markerEl));
